@@ -1,0 +1,19 @@
+services:
+  go_app:
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - webnet
+
+  caddy:
+    image: caddy:latest
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+
+networks:
+  webnet:
