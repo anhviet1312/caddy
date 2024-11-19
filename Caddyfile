@@ -1,6 +1,6 @@
-http://icetea.local {
+http://10.241.94.115, http://icetea.local {
     @allowedIPs {
-       remote_ip private_ranges
+        not header X-Forwarded-For 10.241.94.106
     }
 
     log {
@@ -8,7 +8,6 @@ http://icetea.local {
         level info
     }
 
-    # Allow only private IPs
     handle @allowedIPs {
         reverse_proxy go_app:3000
     }

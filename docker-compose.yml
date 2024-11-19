@@ -1,19 +1,22 @@
 services:
   go_app:
     build: .
+    networks:
+      - go_caddy_network
     ports:
       - "3000:3000"
-    networks:
-      - webnet
 
   caddy:
     image: caddy:latest
+    ports:
+      - "80:80"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-    ports:
-      - "8080:80"
+    depends_on:
+      - go_app
     networks:
-      - webnet
+      - go_caddy_network
 
 networks:
-  webnet:
+  go_caddy_network:
+    driver: bridge
