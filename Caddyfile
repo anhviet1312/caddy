@@ -1,6 +1,6 @@
 http://10.241.94.115, http://icetea.local {
     @allowedIPs {
-        not header X-Forwarded-For 10.241.94.106
+        not remote_ip 10.241.94.106
     }
 
     log {
